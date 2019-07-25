@@ -1,38 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<svg width=150 height=300>
-</svg>
+<html>
+   <head>
+      <script src = "https://d3js.org/d3.v4.min.js"></script>
+   </head>
 
-<script>
-xdomain = [0,1];
-xrange = [0,1];
-ydomain = [0,1];
-yrange = [0,1];
-cdomain = [0,1];
-crange = [0,1];
-debugger;
-xs = d3.scaleLinear().domain(xdomain).range(xrange);
-ys = d3.scaleLinear().domain(ydomain).range(yrange);
-cs = d3.scaleLinear().domain(cdomain).range(crange); 
-console.log("test") 
-debugger;  
-d3.select('svg')
-  .selectAll('rect')
-  .data([4,8,15,16,23,42])
-  .enter()
-  .append('rect')
-    .attr('x',20)
-    .attr('y',function(d,i) {return ys(i);})
-    .attr('width',function(d,i) {return xs(d);})
-    .attr('height',10)
-    .style('fill',function(d,i) {return cs(d);});
-</script>
-</body>
+   <body>
+      <style> 
+          .line {
+             fill: none;
+             stroke: red;
+             stroke-width: 2px;
+          }
+       </style>
+    
+      <script>
+         var margin = {top: 10, right: 10, bottom: 25, left: 50},
+         height = 500 - margin.top - margin.bottom;
+         width = 960 - margin.left - margin.right;
+         var xs = d3.scaleTime().range([0, width]);
+         var ys = d3.scaleLinear().range([height, 0]);
+         var parseDate= d3.timeParse("%Y");
+
+         function scaleX(d)
+          {
+            return xs(d.Year);
+          }
+
+          function scaleY(d)
+          {
+            return ys(d.Annual_Mean);
+          }
+
+         // set line  x and y co-ordinates
+         var valueline = d3.line()
+            .x(scaleX)
+            .y(scaleY);
+
+         var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g").attr("transform",
+               "translate(" + margin.left + "," + margin.top + ")");
+
+         /* Read  the data*/
+         d3.csv("actual.csv", function(data) {
+            data.forEach(function(d) {
+               d.Year = parseDate(d.Year);
+               d.Annual_Mean = parseFloat(d.Annual_Mean,10);
+            });
+
+           // data scaling
+            xs.domain(d3.extent(data, function(d) { return d.Year; }));
+            ys.domain(d3.extent(data, function(d) { return d.Annual_Mean; }));
+
+            // Add the valueline path.
+            svg.append("path")
+               .data([data])
+               .attr("class", "line")
+               .attr("d", valueline)
+               .style("stroke", "red");
+
+            // Add  X Axis
+            svg.append("g")
+               .attr("transform", "translate(0," + height + ")")
+               .call(d3.axisBottom(xs));
+
+            // Add  Y Axis
+            svg.append("g")
+               .call(d3.axisLeft(ys));
+         });
+      </script>
+   </body>
 </html>
