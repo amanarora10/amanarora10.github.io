@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src = "https://d3js.org/d3.v4.min.js"></script>
+      <script src = "greenhouse.js"></script>
+   </head>
+
+   <body>
+      <style> 
+          .line {
+             fill: none;
+             stroke: red;
+             stroke-width: 2px;
+          }
+       </style>
+    
+      <script>
+         var margin = {top: 10, right: 10, bottom: 25, left: 50},
+         height = 500 - margin.top - margin.bottom;
+         width = 960 - margin.left - margin.right;
+         var xs = d3.scaleTime().range([0, width]);
+         var ys = d3.scaleLinear().range([height, 0]);
+         var parseDate= d3.timeParse("%Y");
+
+         function scaleX(d)
+          {
+            return xs(d.Year);
+          }
+
+          function scaleY(d)
+          {
+            return ys(d.Annual_Mean);
+          }
+
+         // set line  x and y co-ordinates
+         var valueline = d3.line()
+            .x(scaleX)
+            .y(scaleY);
+
+         var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g").attr("transform",
+               "translate(" + margin.left + "," + margin.top + ")");
+
+         /* Read the data*/
+         d3.csv("actual.csv", function(data) {
+            data.forEach(function(d) {
+               d.Year = parseDate(d.Year);
+               d.Annual_Mean = parseFloat(d.Annual_Mean,10);
+            });
+
+           // data scaling
+            xs.domain(d3.extent(data, function(d) { return d.Year; }));
+            ys.domain(d3.extent(data, function(d) { return d.Annual_Mean; }));
+
+            // Add the valueline path.
+            svg.append("path")
+               .data([data])
+               .attr("class", "line")
+               .attr("d", valueline)
+               .style("stroke", "red");
+
+            // Add  X Axis
+            svg.append("g")
+               .attr("transform", "translate(0," + height + ")")
+               .call(d3.axisBottom(xs));
+
+            // Add  Y Axis
+            svg.append("g")
+               .call(d3.axisLeft(ys));
+         });
+
+         draw_greenhouse(margin, height,width,svg); 
+ 
+      </script>
+   </body>
+</html>
