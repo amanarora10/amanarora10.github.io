@@ -8,7 +8,7 @@ function populate_scenes(narration)
                   };
    narration.push(scene0)
    var scene1 = {
-                  color:"yellow",
+                  color:"cyan",
                   model:"Human",
                   annotation:"Human factors",
                   axis:false
