@@ -4,7 +4,7 @@
       <script src = "https://d3js.org/d3.v4.min.js"></script>
       <script src = "models.js"></script>
    </head>
-   <h1>Hello world</h1>
+
    <body>
       <style> 
           .line {
@@ -13,7 +13,32 @@
              stroke-width: 2px;
           }
        </style>
-    
+   <h1>Global Climate Change</h1>
+   <script>
+      scene = 0
+      function UpdateScene() {
+        if(scene ==0)
+        { 
+           document.getElementById("annotation").textContent = "test"; 
+           scene = scene + 1
+        } 
+      }
+   </script>
+  
+
+   <p id="annotation">There are multiple factors for global climate change
+      <ul>
+         <li>Human</li>
+         <li>Greenhouse gases</li>
+         <li>Human factors</li>
+         <li>Ozone depletions</li>
+         <li>Orbtial changes</li>
+         <li>Aerosols</li>
+      </ul>
+      <button type="button" onclick="UpdateScene()">Next</button>
+   </p>
+
+
       <script>
          var margin = {top: 10, right: 10, bottom: 25, left: 50},
          height = 500 - margin.top - margin.bottom;
@@ -23,7 +48,7 @@
             .attr("height", height + margin.top + margin.bottom)
             .append("g").attr("transform",
                "translate(" + margin.left + "," + margin.top + ")");
-  
+                        
          draw_model(margin, height,width,svg,'actual','red',true);
          draw_model(margin, height,width,svg,'Greenhouse','green',false); 
          draw_model(margin, height,width,svg,'Human','yellow',false); 
