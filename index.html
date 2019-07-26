@@ -3,6 +3,7 @@
    <head>
       <script src = "https://d3js.org/d3.v4.min.js"></script>
       <script src = "models.js"></script>
+      <script src = "narration.js"></script>
    </head>
 
    <body>
@@ -16,7 +17,7 @@
    <h1>Global Climate Change</h1>
    <p id="annotation">There are multiple factors for global climate change
       <ul id="list">
-         <li id="actual" >Actaul increase</li>
+         <li id="actual" >Actual increase</li>
          <li id="human" >Human Factors</li>
          <li id="greenhouse" >Greenhouse gases</li>
          <li id="ozone" >Ozone depletions</li>
@@ -42,23 +43,8 @@
          //draw_model(margin, height,width,svg,'Greenhouse','green',false); 
          //draw_model(margin, height,width,svg,'Human','yellow',false); 
          //draw_model(margin, height,width,svg,'Ozone','blue',false);
-         var narration =[]
-         var scene0 = {
-                       color:"red",
-                       model:"actual",
-                       annotation:"Actual increase over time",
-                       axis:true
-                       };
-        narration.push(scene0)
-        var scene1 = {
-                       color:"yellow",
-                       model:"human",
-                       annotation:"Human factors",
-                       axis:false
-                       };
-       
-        narration.push(scene1) 
-
+        narration = [] 
+        narration =  populate_scenes(narration)
         scene = 0
         function UpdateScene() {
            document.getElementById("annotation").textContent = narration[scene].annotation; 
