@@ -39,10 +39,6 @@
             .append("g").attr("transform",
                "translate(" + margin.left + "," + margin.top + ")");
                         
-         //draw_model(margin, height,width,svg,'actual','red',true);
-         //draw_model(margin, height,width,svg,'Greenhouse','green',false); 
-         //draw_model(margin, height,width,svg,'Human','yellow',false); 
-         //draw_model(margin, height,width,svg,'Ozone','blue',false);
         narration = [] 
         narration =  populate_scenes(narration)
         scene = 0
@@ -52,7 +48,8 @@
            draw_model(margin, height,width,svg,
            narration[scene].model,
            narration[scene].color,
-           narration[scene].axis);
+           narration[scene].axis,
+           scene);
 
            scene = scene + 1
       }

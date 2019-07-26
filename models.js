@@ -1,5 +1,5 @@
  
-  function draw_model(margin,height,width,svg,model,color,draw_axis)
+  function draw_model(margin,height,width,svg,model,color,draw_axis,scene)
   {
 
    var margin = {top: 10, right: 10, bottom: 25, left: 50};
@@ -8,7 +8,6 @@
    var xs = d3.scaleTime().range([0, width]);
    var ys = d3.scaleLinear().range([height, 0]);
    var parseDate= d3.timeParse("%Y");
-
     function scaleX(d)
        {
          return xs(d.Year);
@@ -61,7 +60,31 @@
             .duration(4000) 
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0); 
-            
+
+   //Add legend  
+        
+   svg.selectAll("dots")
+   .data([model])
+   .enter()
+   .append("circle")
+    .attr("cx", margin.left+10)
+    .attr("cy", function(d,i){ return 10+scene*25}) 
+    .attr("r", 7)
+    .style("fill", function(d){ return color})
+  
+  
+   //Add label
+  svg.selectAll("labels")
+  .data([model])
+  .enter()
+  .append("text")
+    .attr("x", margin.left+30)
+    .attr("y", function(d,i){ return 10+scene*25}) 
+    .style("fill", function(d){ return color})
+    .text(function(d){ return model})
+    .attr("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+
    if(draw_axis)
    {
     // Add  X Axis
