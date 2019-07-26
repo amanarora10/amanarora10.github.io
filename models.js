@@ -1,11 +1,11 @@
  
-  function draw_model(margin,height,width,svg,model,color)
+  function draw_model(margin,height,width,svg,model,color,draw_axis)
   {
 
    var margin = {top: 10, right: 10, bottom: 25, left: 50};
    height = 500 - margin.top - margin.bottom;
    width = 960 - margin.left - margin.right;
-   var xs = d3.scaleLinear().range([0, width]);
+   var xs = d3.scaleTime().range([0, width]);
    var ys = d3.scaleLinear().range([height, 0]);
    var parseDate= d3.timeParse("%Y");
 
@@ -26,11 +26,18 @@
       .y(scaleY);
 
 
-   /* Read the data*/
-   d3.csv("models.csv", function(data) {
+   /* Set the file accoding to model*/
+   model =="actual"?file = "actual.csv":file = "models.csv";
+   
+
+   d3.csv(file, function(data) {
       data.forEach(function(d) {
-         d.Year = parseInt(d.Year,10);
-         d.model = parseFloat(d[model]-287.4590308);
+         d.Year = parseDate(d.Year,10);
+         if(model!="actual")
+            d.model = parseFloat(d[model]-287.4590308);
+         else
+            d.model = parseFloat(d.Annual_Mean,10);
+        
       });
 
      // data scaling
@@ -43,6 +50,17 @@
          .attr("class", "line")
          .attr("d", valueline)
          .style("stroke", color);
+
+   if(draw_axis)
+   {
+    // Add  X Axis
+      svg.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xs));
+   // Add  Y Axis
+      svg.append("g")
+         .call(d3.axisLeft(ys));
+   }       
 
    });
 
