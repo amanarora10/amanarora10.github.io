@@ -14,20 +14,17 @@
           }
        </style>
    <h1>Global Climate Change</h1>
-
-
-  
-
    <p id="annotation">There are multiple factors for global climate change
-      <ul>
-         <li>Human</li>
-         <li>Greenhouse gases</li>
-         <li>Human factors</li>
-         <li>Ozone depletions</li>
-         <li>Orbtial changes</li>
-         <li>Aerosols</li>
+      <ul id="list">
+         <li id="actual" >Actaul increase</li>
+         <li id="human" >Human Factors</li>
+         <li id="greenhouse" >Greenhouse gases</li>
+         <li id="ozone" >Ozone depletions</li>
+         <li id="orbital"  >Orbtial changes</li>
+         <li id="aerosols" >Aerosols</li>
       </ul>
       <button type="button" onclick="UpdateScene()">Next</button>
+      <button type="button" onclick="document.location.reload()">Reset</button>
    </p>
 
 
@@ -44,23 +41,38 @@
          //draw_model(margin, height,width,svg,'actual','red',true);
          //draw_model(margin, height,width,svg,'Greenhouse','green',false); 
          //draw_model(margin, height,width,svg,'Human','yellow',false); 
-         //draw_model(margin, height,width,svg,'Ozone','blue',false); 
+         //draw_model(margin, height,width,svg,'Ozone','blue',false);
+         var narration =[]
+         var scene0 = {
+                       color:"red",
+                       model:"actual",
+                       annotation:"Actual increase over time",
+                       axis:true
+                       };
+        narration.push(scene0)
+        var scene1 = {
+                       color:"yellow",
+                       model:"human",
+                       annotation:"Human factors",
+                       axis:false
+                       };
+       
+        narration.push(scene1) 
 
         scene = 0
         function UpdateScene() {
-        if(scene ==0)
-        { 
-           document.getElementById("annotation").textContent = "Actual increase over time"; 
-           draw_model(margin, height,width,svg,'actual','red',true);
-        } 
-        if(scene ==1)
-        { 
-           document.getElementById("annotation").textContent = "Affect of greenhouse Gases"; 
-           draw_model(margin, height,width,svg,'Greenhouse','green',false); 
+           document.getElementById("annotation").textContent = narration[scene].annotation; 
+
+           draw_model(margin, height,width,svg,
+           narration[scene].model,
+           narration[scene].color,
+           narration[scene].axis);
+
            scene = scene + 1
-        } 
-        scene = scene + 1
       }
+
+
+
 
       </script>
    </body>
