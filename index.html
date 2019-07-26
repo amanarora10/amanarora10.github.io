@@ -14,16 +14,8 @@
           }
        </style>
    <h1>Global Climate Change</h1>
-   <script>
-      scene = 0
-      function UpdateScene() {
-        if(scene ==0)
-        { 
-           document.getElementById("annotation").textContent = "test"; 
-           scene = scene + 1
-        } 
-      }
-   </script>
+
+
   
 
    <p id="annotation">There are multiple factors for global climate change
@@ -49,10 +41,26 @@
             .append("g").attr("transform",
                "translate(" + margin.left + "," + margin.top + ")");
                         
-         draw_model(margin, height,width,svg,'actual','red',true);
-         draw_model(margin, height,width,svg,'Greenhouse','green',false); 
-         draw_model(margin, height,width,svg,'Human','yellow',false); 
-         draw_model(margin, height,width,svg,'Ozone','blue',false); 
+         //draw_model(margin, height,width,svg,'actual','red',true);
+         //draw_model(margin, height,width,svg,'Greenhouse','green',false); 
+         //draw_model(margin, height,width,svg,'Human','yellow',false); 
+         //draw_model(margin, height,width,svg,'Ozone','blue',false); 
+
+        scene = 0
+        function UpdateScene() {
+        if(scene ==0)
+        { 
+           document.getElementById("annotation").textContent = "Actual increase over time"; 
+           draw_model(margin, height,width,svg,'actual','red',true);
+        } 
+        if(scene ==1)
+        { 
+           document.getElementById("annotation").textContent = "Affect of greenhouse Gases"; 
+           draw_model(margin, height,width,svg,'Greenhouse','green',false); 
+           scene = scene + 1
+        } 
+        scene = scene + 1
+      }
 
       </script>
    </body>
