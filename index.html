@@ -2,7 +2,7 @@
 <html>
    <head>
       <script src = "https://d3js.org/d3.v4.min.js"></script>
-      <script src = "greenhouse.js"></script>
+      <script src = "models.js"></script>
    </head>
 
    <body>
@@ -71,7 +71,8 @@
                .call(d3.axisLeft(ys));
          });
 
-         draw_greenhouse(margin, height,width,svg); 
+         draw_model(margin, height,width,svg,'Greenhouse','green'); 
+         draw_model(margin, height,width,svg,'Human','yellow'); 
  
       </script>
    </body>

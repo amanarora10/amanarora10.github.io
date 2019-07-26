@@ -1,5 +1,5 @@
  
-  function draw_greenhouse(margin,height,width,svg)
+  function draw_model(margin,height,width,svg,model,color)
   {
 
    var margin = {top: 10, right: 10, bottom: 25, left: 50};
@@ -16,7 +16,7 @@
    
    function scaleY(d)
        {
-         return ys(d.Greenhouse);
+         return ys(d.model);
        }
 
 
@@ -30,19 +30,19 @@
    d3.csv("models.csv", function(data) {
       data.forEach(function(d) {
          d.Year = parseInt(d.Year,10);
-         d.Greenhouse = parseFloat(d.Greenhouse-287.4590308);
+         d.model = parseFloat(d[model]-287.4590308);
       });
 
      // data scaling
       xs.domain(d3.extent(data, function(d) { return d.Year; }));
-      ys.domain(d3.extent(data, function(d) { return d.Greenhouse; }));
+      ys.domain(d3.extent(data, function(d) { return d.model; }));
 
       // Add the valueline path.
       svg.append("path")
          .data([data])
          .attr("class", "line")
          .attr("d", valueline)
-         .style("stroke", "yellow");
+         .style("stroke", color);
 
    });
 
