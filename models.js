@@ -45,12 +45,23 @@
       ys.domain(d3.extent(data, function(d) { return d.model; }));
 
       // Add the valueline path.
-      svg.append("path")
+      var path = svg.append("path")
          .data([data])
          .attr("class", "line")
          .attr("d", valueline)
          .style("stroke", color);
+      
+      var totalLength = path.node().getTotalLength();
 
+         // Set Properties of Dash Array and Dash Offset and initiate Transition
+         path
+            .attr("stroke-dasharray", totalLength + " " + totalLength)
+            .attr("stroke-dashoffset", totalLength)
+            .transition() 
+            .duration(4000) 
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0); 
+            
    if(draw_axis)
    {
     // Add  X Axis
