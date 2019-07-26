@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src = "https://d3js.org/d3.v4.min.js"></script>
+      <script src = "greenhouse.js"></script>
+   </head>
+
+   <body>
+      <style> 
+          .line {
+             fill: none;
+             stroke: red;
+             stroke-width: 2px;
+          }
+       </style>
+    
+      <script>
+      var margin = {top: 10, right: 10, bottom: 25, left: 50};
+      height = 500 - margin.top - margin.bottom;
+      width = 960 - margin.left - margin.right;
+       
+      var xs = d3.scaleTime().range([0, width]);
+      var ys = d3.scaleLinear().range([height, 0]);
+
+      var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g").attr("transform",
+               "translate(" + margin.left + "," + margin.top + ")");
+
+      //draw_actual(margin, height,width,svg); 
+        draw_greenhouse(margin, height,width,svg); 
+
+      // Add  X Axis
+     svg.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xs));
+       // Add  Y Axis
+      svg.append("g")
+         .call(d3.axisLeft(ys));
+
+      </script>
+   </body>
+</html>
