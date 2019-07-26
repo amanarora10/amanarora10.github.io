@@ -26,7 +26,7 @@ function scaleY(d)
    d3.csv("actual.csv", function(data) {
       data.forEach(function(d) {
          console.log(d.Year)
-         d.Year = parseDate(d.Year,10);
+         d.Year = parseDate(d.Year);
          console.log(d.Year)
          d.Annual_Mean = parseFloat(d.Annual_Mean);
       });
