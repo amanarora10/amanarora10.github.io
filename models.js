@@ -48,7 +48,7 @@
      {
       xs.domain(d3.extent(data, function(d) { return d.Year; }));
       //ys.domain(d3.extent(data, function(d) { return d.model; }));
-      ys.domain([-1.0,1]);
+      ys.domain([-0.6,1]);
      } 
       // Add the valueline path.
       var path = svg.append("path")
