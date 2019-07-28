@@ -1,12 +1,15 @@
- 
+  var xs, ys; 
   function draw_model(margin,height,width,svg,model,color,draw_axis,scene)
   {
 
    var margin = {top: 10, right: 10, bottom: 25, left: 50};
    height = 500 - margin.top - margin.bottom;
    width = 960 - margin.left - margin.right;
-   var xs = d3.scaleTime().range([0, width]);
-   var ys = d3.scaleLinear().range([height, 0]);
+   if(draw_axis == true )
+   {
+    xs = d3.scaleTime().range([0, width]);
+    ys = d3.scaleLinear().range([height, 0]);
+   }
    var parseDate= d3.timeParse("%Y");
     function scaleX(d)
        {
@@ -32,6 +35,7 @@
    d3.csv(file, function(data) {
       data.forEach(function(d) {
          d.Year = parseDate(d.Year,10);
+         /*Subract avg temp. to find delta from normal*/
          if(model!="Actual")
             d.model = parseFloat(d[model]-287.4590308);
          else
@@ -40,9 +44,12 @@
       });
 
      // data scaling
+     if(draw_axis == true )
+     {
       xs.domain(d3.extent(data, function(d) { return d.Year; }));
-      ys.domain(d3.extent(data, function(d) { return d.model; }));
-
+      //ys.domain(d3.extent(data, function(d) { return d.model; }));
+      ys.domain([-1.0,1]);
+     } 
       // Add the valueline path.
       var path = svg.append("path")
          .data([data])

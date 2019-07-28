@@ -16,11 +16,11 @@
        </style>
    <h1>Global Climate Change</h1>
    
-   <p id> There are multiple factors that are suspected of causing global warming both human and non human. The visualization uses the data from NASA https://data.giss.nasa.gov/ to compare the estimated increase by human and non human factors. Press start to begin the visualization and reset to restart it.
+   <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data from NASA https://data.giss.nasa.gov/ to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
    </p>
    <p>
      <button type="button" onclick="document.location.reload()">Reset</button>
-     <button type="button" onclick="UpdateScene()">Next</button>
+     <button type="button" id="myButton1" onclick="UpdateScene()">Start</button>
    </p>
 
 
@@ -40,10 +40,23 @@
         annotation0 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",30).attr("fill","black").style("font-weight","bold");
         annotation1 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",50).attr("fill","black").style("font-weight","bold");
          
-        rect_annot = d3.select('svg').append("g").append("rect").attr("x",230).attr("y",10).attr("width","420").attr("height","50").attr("fill-opacity", "0")
-        .attr("fill","grey").attr("rx","20").attr("ry","20");
+        rect_annot = d3.select('svg').append("g").append("rect").attr("x",230).attr("y",10).attr("width","440").attr("height","50").attr("fill-opacity", "0")
+        .attr("fill","darkgrey ").attr("rx","20").attr("ry","20");
 
         function UpdateScene() {
+
+         /*Change button name*/   
+         if(scene ==0)
+         {
+            document.getElementById("myButton1").innerHTML="Next";
+         }   
+
+         /*Restart after all scenes*/
+         if(scene==6)
+         {
+            document.location.reload(true);
+            document.getElementById("myButton1").innerHTML="Start";
+         }
            annotation0
            .text(narration[scene].annotation[0]);
            annotation1
@@ -56,10 +69,11 @@
            narration[scene].color,
            narration[scene].axis,
            scene);
-           if(scene==4)
+           if(scene==5)
            {
             rect_annot.attr("fill-opacity",0.5).attr("fill","red")
            }
+           
            scene = scene + 1
            
       }
