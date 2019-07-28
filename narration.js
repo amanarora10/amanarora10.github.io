@@ -11,7 +11,7 @@ function populate_scenes(narration)
    var scene1 = {
     color:"Dimgray",
     model:"Volcanic",
-    annotation:["Volcanic eruptions can change the atmospehric compositon","But does not show strong corelation with temp."],
+    annotation:["Volcanic eruptions can change the atmospehric compositon","But does not show strong correlation with temp."],
     axis:false
     };
 narration.push(scene1)
