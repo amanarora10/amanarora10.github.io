@@ -7,8 +7,9 @@
    </head>
 
    <body>
-      <style> 
-          .line {
+
+     <style> 
+         .line {
              fill: none;
              stroke: red;
              stroke-width: 2px;
@@ -38,10 +39,10 @@
                font-size: 16px;
                line-height: 20px;
             }
-
+      
        </style>
    <h1>Global Climate Change</h1>
-   
+     
    <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data from NASA https://data.giss.nasa.gov/ to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
    </p>
    <p>
@@ -67,11 +68,11 @@
         narration = [] 
         narration =  populate_scenes(narration)
         scene = 0
-        annotation0 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",30).attr("fill","black").style("font-weight","bold");
-        annotation1 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",50).attr("fill","black").style("font-weight","bold");
+        annotation0 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",30).attr("fill","black").style("font-weight","bold").style("text-decoration","underline");
+
+        annotation1 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",50).attr("fill","black").style("font-weight","bold").attr("text-decoration","underline");
          
-        rect_annot = d3.select('svg').append("g").append("rect").attr("x",230).attr("y",10).attr("width","440").attr("height","50").attr("fill-opacity", "0")
-        .attr("fill","darkgrey ").attr("rx","20").attr("ry","20")
+        rect_annot = d3.select('svg').append("g").append("rect").attr("x",230).attr("y",10).attr("width","440").attr("height","50").attr("fill-opacity", "0").attr("fill","darkgrey ").attr("rx","20").attr("ry","20")
         
         rect_annot.on("mouseover", function(d) {
          var xPosition = parseFloat(d3.select(this).attr("x"));
@@ -89,11 +90,9 @@
          .on("mouseout", function() {
            d3.select("#tooltip").classed("hidden", true);
            if(scene!=0)
-            rect_annot.attr("fill-opacity", "0.1")
+             rect_annot.attr("fill-opacity", "0.1")
          });
      
-       
-
         function UpdateScene() {
 
          /*Change button name*/   
