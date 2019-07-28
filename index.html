@@ -15,17 +15,12 @@
           }
        </style>
    <h1>Global Climate Change</h1>
-   <p id="annotation">There are multiple factors for global climate change
-      <ul id="list">
-         <li id="actual" >Actual increase</li>
-         <li id="human" >Human Factors</li>
-         <li id="greenhouse" >Greenhouse gases</li>
-         <li id="ozone" >Ozone depletions</li>
-         <li id="orbital"  >Orbtial changes</li>
-         <li id="aerosols" >Aerosols</li>
-      </ul>
-      <button type="button" onclick="UpdateScene()">Next</button>
-      <button type="button" onclick="document.location.reload()">Reset</button>
+   
+   <p id> There are multiple factors that are suspected of causing global warming both human and non human. The visualization uses the data from NASA https://data.giss.nasa.gov/ to compare the estimated increase by human and non human factors. Press start to begin the visualization and reset to restart it.
+   </p>
+   <p>
+     <button type="button" onclick="document.location.reload()">Reset</button>
+     <button type="button" onclick="UpdateScene()">Next</button>
    </p>
 
 
@@ -42,16 +37,31 @@
         narration = [] 
         narration =  populate_scenes(narration)
         scene = 0
+        annotation0 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",30).attr("fill","black").style("font-weight","bold");
+        annotation1 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",50).attr("fill","black").style("font-weight","bold");
+         
+        rect_annot = d3.select('svg').append("g").append("rect").attr("x",230).attr("y",10).attr("width","420").attr("height","50").attr("fill-opacity", "0")
+        .attr("fill","grey").attr("rx","20").attr("ry","20");
+
         function UpdateScene() {
-           document.getElementById("annotation").textContent = narration[scene].annotation; 
+           annotation0
+           .text(narration[scene].annotation[0]);
+           annotation1
+           .text(narration[scene].annotation[1]);
+          
+           rect_annot.attr("fill-opacity",0.1)
 
            draw_model(margin, height,width,svg,
            narration[scene].model,
            narration[scene].color,
            narration[scene].axis,
            scene);
-
+           if(scene==4)
+           {
+            rect_annot.attr("fill-opacity",0.5).attr("fill","red")
+           }
            scene = scene + 1
+           
       }
 
 

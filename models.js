@@ -26,13 +26,13 @@
 
 
    /* Set the file accoding to model*/
-   model =="actual"?file = "actual.csv":file = "models.csv";
+   model =="Actual"?file = "actual.csv":file = "models.csv";
    
 
    d3.csv(file, function(data) {
       data.forEach(function(d) {
          d.Year = parseDate(d.Year,10);
-         if(model!="actual")
+         if(model!="Actual")
             d.model = parseFloat(d[model]-287.4590308);
          else
             d.model = parseFloat(d.Annual_Mean,10);
@@ -84,7 +84,7 @@
     .text(function(d){ return model})
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
-
+   
    if(draw_axis)
    {
     // Add  X Axis
