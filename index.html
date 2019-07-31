@@ -48,7 +48,68 @@
    <p>
      <button type="button" onclick="document.location.reload()">Reset</button>
      <button type="button" id="myButton1"  onclick="UpdateScene()">Start</button>
+     
    </p>
+
+   <script>     
+      function check_box_change()
+      {
+        check_boxes_state = []
+        var actual =  document.getElementById("actual_check")
+        var volcano =  document.getElementById("volcano_check")
+        var orbital =  document.getElementById("orbital_check")
+        var solar =  document.getElementById("solar_check")
+        var aerosol=  document.getElementById("aerosol_check")
+
+          
+        //Check actual checkbox
+        if(actual.checked==true)
+          paths[1].style("display", "block");
+        else if(actual.checked==false)
+          paths[1].style("display", "none");
+
+  
+        //Check volcano checkbox
+        if(volcano.checked==true)
+          paths[2].style("display", "block");
+        else if(volcano.checked==false)
+          paths[2].style("display", "none");
+
+        //Check orbital checkbox
+        if(orbital.checked==true)
+          paths[3].style("display", "block");   
+        else if(orbital.checked==false)
+          paths[3].style("display", "none");
+
+        //Check solar checkbox
+        if(solar.checked==true)
+          paths[4].style("display", "block");
+        else if(solar.checked==false)
+          paths[4].style("display", "none");
+
+        //Check aerosol checkbox
+        if(aerosol.checked==true)
+          paths[5].style("display", "block");
+        else if(aerosol.checked==false)
+          paths[5].style("display", "none");
+
+      
+      }
+     </script>
+
+   <p id = "checkboxes" style="margin-left: 8em" >
+     Actual:  <input type="checkbox" id="actual_check"   onclick="check_box_change()" checked> 
+
+     Volcanic:  <input type="checkbox" id="volcano_check"   onclick="check_box_change()" checked> 
+
+     Orbital:  <input type="checkbox" id="orbital_check"   onclick="check_box_change()" checked> 
+
+     Solar:  <input type="checkbox" id="solar_check"   onclick="check_box_change()" checked> 
+
+     Aerosol:  <input type="checkbox" id="aerosol_check"   onclick="check_box_change()" checked> 
+
+   </p>
+
     
    <div id="tooltip" class="hidden">
     <p><strong>Percentage Value</strong></p>
@@ -56,18 +117,23 @@
    </div>
 
      <script>
-         var margin = {top: 10, right: 10, bottom: 10, left: 50},
-         height = 600 - margin.top - margin.bottom;
-         width = 960 - margin.left - margin.right;
+         var margin = {top: 10, right: 10, bottom: 10, left: 50};
+         var height = 600 - margin.top - margin.bottom;
+         var width = 960 - margin.left - margin.right;
+         var paths=[], dots=[];
          var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g").attr("transform",
                "translate(" + margin.left + "," + margin.top + ")");
                         
-        narration = [] 
+        narration = []; 
         narration =  populate_scenes(narration)
         scene = 0
+
+      //Hide check boxes till last scene
+      checkboxes = document.getElementById("checkboxes");checkboxes.style.display = "none";
+
         annotation0 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",30).attr("fill","black").style("font-weight","bold").style("text-decoration","underline");
 
         annotation1 = d3.select('svg').append("g").append("text").attr("x",240).attr("y",50).attr("fill","black").style("font-weight","bold").attr("text-decoration","underline");
@@ -104,8 +170,11 @@
          /*Restart after all scenes*/
          if(scene==6)
          {
-            document.location.reload(true);
-            document.getElementById("myButton1").innerHTML="Start";
+            //document.location.reload(true);
+           //document.getElementById("myButton1")//.innerHTML="Start";
+           document.getElementById("myButton1").disabled=true;
+           checkboxes = document.getElementById("checkboxes");checkboxes.style.display = "block";
+           return
          }
            annotation0
            .text(narration[scene].annotation[0]);
@@ -113,14 +182,18 @@
            .text(narration[scene].annotation[1]);
           
            rect_annot.attr("fill-opacity",0.1)
-
-           draw_model(margin, height,width,svg,
+           
+           var result = draw_model(margin, height,width,svg,
            narration[scene].model,
            narration[scene].color,
            narration[scene].axis,
            scene);
+           paths.push(result.paths)
+           dots.push(result.dots)
+         
            if(scene==5)
            {
+ 
             rect_annot.attr("fill-opacity",0.5).attr("fill","red")
            }
            

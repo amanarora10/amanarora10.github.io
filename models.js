@@ -1,7 +1,6 @@
-  var xs, ys; 
+  var xs, ys,path,dot,result; 
   function draw_model(margin,height,width,svg,model,color,draw_axis,scene)
   {
-
    var margin = {top: 10, right: 10, bottom: 25, left: 50};
    height = 500 - margin.top - margin.bottom;
    width = 960 - margin.left - margin.right;
@@ -51,7 +50,7 @@
       ys.domain([-0.6,1]);
      } 
       // Add the valueline path.
-      var path = svg.append("path")
+       path = svg.append("path")
          .data([data])
          .attr("class", "line")
          .attr("d", valueline)
@@ -70,7 +69,7 @@
 
    //Add legend  
         
-   svg.selectAll("dots")
+   dot = svg.selectAll("dots")
    .data([model])
    .enter()
    .append("circle")
@@ -78,7 +77,6 @@
     .attr("cy", function(d,i){ return 10+scene*25}) 
     .attr("r", 7)
     .style("fill", function(d){ return color})
-  
   
    //Add label
   svg.selectAll("labels")
@@ -121,5 +119,11 @@
    }       
 
    });
-
+   
+   result = {
+         paths: path,
+         dots: dot 
+   }
+   
+   return result
    }
