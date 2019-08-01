@@ -43,7 +43,7 @@
        </style>
    <h1>Global Climate Change</h1>
      
-   <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data from NASA https://data.giss.nasa.gov/ to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
+   <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data and text sourced primarly from NASA https://data.giss.nasa.gov/ and other public sources to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
    </p>
    <p>
      <button type="button" onclick="document.location.reload()">Reset</button>
@@ -112,8 +112,6 @@
 
     
    <div id="tooltip" class="hidden">
-    <p><strong>Percentage Value</strong></p>
-    <p><span id="value">100</span>%</p>
    </div>
 
      <script>
@@ -142,11 +140,11 @@
         
         rect_annot.on("mouseover", function(d) {
          var xPosition = parseFloat(d3.select(this).attr("x"));
-			var yPosition = parseFloat(d3.select(this).attr("y")) +130;
+			   var yPosition = parseFloat(d3.select(this).attr("y")) +130;
 			d3.select("#tooltip")
 				.style("left", xPosition + "px")
 				.style("top", yPosition + "px")
-            .text("test");
+
          
         if(scene!==0)  
          { 
@@ -181,6 +179,8 @@
            annotation1
            .text(narration[scene].annotation[1]);
           
+           d3.select("#tooltip").text(narration[scene].tooltip);
+
            rect_annot.attr("fill-opacity",0.1)
            
            var result = draw_model(margin, height,width,svg,
