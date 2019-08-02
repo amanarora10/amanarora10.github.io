@@ -49,11 +49,15 @@ function populate_scenes(narration)
    var scene5 = {
     color:"green",
     model:"Greenhouse",
-    annotation:["Model based on Greenhouse gases shows strong correlation","with actual temp. increase, its very likely the primary factor"],
+    annotation:["Greenhouse models shows strong correlation with actual temp." ,"increase. Its conclusively primary factor for global warming"],
     axis:false,    
     tooltip: "On Earth, human activities are changing the natural greenhouse. Over the last century the burning of fossil fuels like coal and oil has increased the concentration of atmospheric carbon dioxide (CO2). This happens because the coal or oil burning process combines carbon with oxygen in the air to make CO2. To a lesser extent, the clearing of land for agriculture, industry, and other human activities has increased concentrations of greenhouse gases."
     };
    narration.push(scene5) 
+
+   var scene6 = {annotation:["Check/uncheck boxes above to contrast  temp increase"," attributed to greenhouse with other factors"],
+   tooltip:"Compare different factors using the checkboxes above" }
+   narration.push(scene6); 
 
 
    return narration;

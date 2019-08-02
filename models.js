@@ -106,7 +106,7 @@
                "translate(" + (width/2) + " ," + 
                               (height + margin.top + 20) + ")")
          .style("text-anchor", "middle")
-         .text("Year");
+         .text("Time");
       
       svg.append("text")
          .attr("transform", "rotate(-90)")

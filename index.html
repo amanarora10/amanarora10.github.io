@@ -118,7 +118,7 @@
          var margin = {top: 10, right: 10, bottom: 10, left: 50};
          var height = 600 - margin.top - margin.bottom;
          var width = 960 - margin.left - margin.right;
-         var paths=[], dots=[];
+         var paths=[], dots=[],annotation0, annotation1;
          var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -172,13 +172,38 @@
            //document.getElementById("myButton1")//.innerHTML="Start";
            document.getElementById("myButton1").disabled=true;
            checkboxes = document.getElementById("checkboxes");checkboxes.style.display = "block";
+           annotation0
+           .style("opacity", 0)
+           .text(narration[scene].annotation[0])
+           .transition()
+           .duration(1000)
+           .style("opacity", 1);
+           
+           annotation1
+           .style("opacity", 0)
+           .text(narration[scene].annotation[1])
+           .transition()
+           .duration(1000)
+           .style("opacity", 1);
+           
+           d3.select("#tooltip").text(narration[scene].tooltip);
+ 
            return
          }
            annotation0
-           .text(narration[scene].annotation[0]);
+           .style("opacity", 0)
+           .text(narration[scene].annotation[0])
+           .transition()
+           .duration(1000)
+           .style("opacity", 1);
+
            annotation1
-           .text(narration[scene].annotation[1]);
-          
+           .style("opacity", 0)
+           .text(narration[scene].annotation[1])
+           .transition()
+           .duration(1000)
+           .style("opacity", 1);
+
            d3.select("#tooltip").text(narration[scene].tooltip);
 
            rect_annot.attr("fill-opacity",0.1)
@@ -193,17 +218,13 @@
          
            if(scene==5)
            {
- 
+
             rect_annot.attr("fill-opacity",0.5).attr("fill","red")
            }
            
            scene = scene + 1
            
       }
-
-
-
-
       </script>
    </body>
 </html>
