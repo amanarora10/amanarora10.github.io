@@ -43,7 +43,7 @@
        </style>
    <h1>Global Climate Change</h1>
      
-   <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data and text sourced primarly from NASA https://data.giss.nasa.gov/ and other public sources to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
+   <p id> There are multiple factors that are suspected of causing global warming  - both human and non human. The visualization uses the data and supporting text sourced primarly from NASA https://data.giss.nasa.gov/ and other public sources to compare the estimated temperature increases by these  factors with actual increases. Press start button to begin the visualization and reset button to restart it.
    </p>
    <p>
      <button type="button" disabled id="myButton0"  onclick="document.location.reload()">Reset</button>
@@ -116,7 +116,7 @@
 
      <script>
          var margin = {top: 10, right: 10, bottom: 10, left: 50};
-         var height = 600 - margin.top - margin.bottom;
+         var height = 510 - margin.top - margin.bottom;
          var width = 960 - margin.left - margin.right;
          var paths=[], dots=[],annotation0, annotation1;
          var svg = d3.select("body").append("svg")
@@ -164,7 +164,7 @@
          {
             document.getElementById("myButton1").innerHTML="Next";
             document.getElementById("myButton0").disabled=false;
-             
+            document.getElementById("ref_txt").style.display = "block";
          }   
 
          /*Restart after all scenes*/
@@ -228,5 +228,6 @@
            
       }
       </script>
+   <p hidden id = "ref_txt" style="margin-left: 8em" style="font-size:25%;"> Data and supporting text from NASA https://data.giss.nasa.gov/ and other public sources </p>   
    </body>
 </html>
