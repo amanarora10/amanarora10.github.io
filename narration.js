@@ -12,9 +12,9 @@ function populate_scenes(narration)
    var scene1 = {
     color:"Dimgray",
     model:"Volcanic",
-    annotation:["Volcanic eruptions can change the atmospehric compositon. The","data however does not show it contributing to global warming"],
+    annotation:["Volcanic eruptions changes atmospehric compositon. The model","though does not show it contributing significantly to warming"],
     axis:false,
-    tooltip: "When a volcano erupts, it spews ash and aerosol droplets into the atmosphere. These are capable of cooling the planet, though typically it lasts a few days or weeks before they are removed from the atmosphere, according to the U.S. Geological Survey. The airborne particles reflect more sunlight, which otherwise would warm Earth. Also emitted is sulfur dioxide gas, which can cause cooling. As the sulfur dioxide is converted into sulfuric acid, it creates aerosol droplets, which further reflect the sun's rays away from Earth and contribute to cooling."
+    tooltip: "When a volcano erupts, it spews ash and aerosol droplets into the atmosphere. These are capable of cooling the planet, though typically it lasts a few days or weeks before they are removed from the atmosphere, according to the U.S. Geological Survey. The airborne particles reflect more sunlight, which otherwise would warm Earth. Also emitted is sulfur dioxide gas, which can cause cooling. As the sulfur dioxide is converted into sulfuric acid, it creates aerosol droplets, which further reflect the sun's rays away from Earth"
     };
    narration.push(scene1)
 
