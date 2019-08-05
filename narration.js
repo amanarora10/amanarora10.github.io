@@ -12,7 +12,7 @@ function populate_scenes(narration)
    var scene1 = {
     color:"Dimgray",
     model:"Volcanic",
-    annotation:["Volcanic eruptions can change the atmospehric compositon","But have cooling effect instead of warming"],
+    annotation:["Volcanic eruptions can change the atmospehric compositon. The","data however does not show it contributing to global warming"],
     axis:false,
     tooltip: "When a volcano erupts, it spews ash and aerosol droplets into the atmosphere. These are capable of cooling the planet, though typically it lasts a few days or weeks before they are removed from the atmosphere, according to the U.S. Geological Survey. The airborne particles reflect more sunlight, which otherwise would warm Earth. Also emitted is sulfur dioxide gas, which can cause cooling. As the sulfur dioxide is converted into sulfuric acid, it creates aerosol droplets, which further reflect the sun's rays away from Earth and contribute to cooling."
     };
@@ -39,7 +39,7 @@ function populate_scenes(narration)
    var scene4 = {
     color:"purple",
     model:"Aerosol",
-    annotation:["Aerosols scatter and absorb solar radiation","  the effect of aerosols is to cool down global temperatures"],
+    annotation:["Aerosols scatter and absorb solar radiation. The effect","of aerosols is to cool rather than warm global temperatures"],
     axis:false,
     tooltip: "Key aerosol groups include sulfates, organic carbon, black carbon, nitrates, mineral dust, and sea salt. The bulk of aerosols—about 90 percent by mass—have natural origins. The remaining 10 percent of aerosols are considered anthropogenic, or human-made, and they come from a variety of sources.Fossil fuel combustion produces large amounts of sulfur dioxide, which reacts with water vapor and other gases in the atmosphere to create sulfate aerosols. Biomass burning, a common method of clearing land and consuming farm waste, yields smoke that’s comprised mainly of organic carbon and black carbon"
     };
